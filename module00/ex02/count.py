@@ -23,6 +23,8 @@ if __name__ == "__main__":
     elif len(sys.argv) == 1:
         text_analyzer(None)
     else:
+        # if there is one argument, check if it is a file. If some string
+        # accidentally coincides with a file name, the file is preferred
         if os.path.exists(sys.argv[1]):
             text = Path(sys.argv[1]).read_text()
             text_analyzer(text)
