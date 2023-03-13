@@ -22,8 +22,9 @@ def ft_progress(list):
         # Write PROGRESS BAR
         progress_bar += "s ["
         
-        # <index of val> / length of list E [0, 1]
-        # floor (<index of val> / length of list) == <index of val> // length of list E [0, 10]
+        # <index of val> / len(list) E [0, 1]
+        # floor (<index of val> * k / len(list)
+        #           == <index of val> * k // len(list) E [0, k]
         number_of_progress_lines = (list.index(val) * 30 // len(list))
         for x in range(number_of_progress_lines):
             progress_bar += "="
