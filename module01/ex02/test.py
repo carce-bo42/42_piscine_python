@@ -34,3 +34,18 @@ try:
     u3 = 3 / u1
 except Exception as e:
     print(f'exception detected: {str(e)}')
+
+# other constructors:
+# Should give [[0.], [1.], [2.], [3.]]
+w1 = Vector(4)
+print(w1)
+
+w2 = Vector((0,8))
+w3 = Vector((2, 10))
+
+# should give [[-2.], [-2.] ... ] (__rsub__ != __sub__)
+print(f'{w2} - {w3} = {w3.__rsub__(w2)}')
+
+# Should be the same
+print(w2)
+print(w2.__repr__())
