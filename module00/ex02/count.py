@@ -12,7 +12,7 @@ def text_analyzer(text):
     punct_marks = sum(1 for c in text if c in string.punctuation)
     spaces = sum(1 for c in text if c.isspace())
     print(f'- {upcase} upper letter(s)')
-    print(f'- {lowcase} lowerletter(s)')
+    print(f'- {lowcase} lower letter(s)')
     print(f'- {punct_marks} punctuation mark(s)')
     print(f'- {spaces} space(s)')
 

@@ -5,7 +5,7 @@ if len(sys.argv) == 1 or len(sys.argv) > 2:
 
 if (not sys.argv[1].isnumeric()):
     print("AssertionError: more than one argument are provided")
-    exit(0)
+    exit(1)
 
 n = int(sys.argv[1])
 if n == 0:
