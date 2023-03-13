@@ -10,14 +10,11 @@ def ft_progress(list):
         progress_bar += "ETA: "
         
         if list.index(val) == 0: # (1)
-            expected_time = time.time()
-            for k in list:
-                time.sleep(0.01) # Simulate doing a few calculations
-            expected_time = time.time() - expected_time
+            expected_time = 0. + (0.01 * len(list)) # Simulate doing a few calculations
             yield expected_time
 
-            time_passed = time.time()
-            yield time_passed
+            start_time = time.time()
+            yield start_time
 
         # Write ETA: 
         progress_bar += "{:.2f}".format(expected_time)
@@ -40,7 +37,7 @@ def ft_progress(list):
 
         progress_bar += ' | '
         progress_bar += "elapsed time: "
-        progress_bar += f'{(time.time() - time_passed):.2f}s'
+        progress_bar += f'{(time.time() - start_time):.2f}s'
 
         print("\r", progress_bar, end='')
         yield val
