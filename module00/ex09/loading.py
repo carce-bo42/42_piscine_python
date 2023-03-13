@@ -12,7 +12,7 @@ def ft_progress(list):
         if list.index(val) == 0: # (1)
             expected_time = time.time()
             for k in list:
-                time.sleep(0.005) # Simulate doing a few calculations
+                time.sleep(0.01) # Simulate doing a few calculations
             expected_time = time.time() - expected_time
             yield expected_time
 
@@ -27,11 +27,11 @@ def ft_progress(list):
         
         # <index of val> / length of list E [0, 1]
         # floor (<index of val> / length of list) == <index of val> // length of list E [0, 10]
-        number_of_progress_lines = (list.index(val) * 10 // len(list))
+        number_of_progress_lines = (list.index(val) * 30 // len(list))
         for x in range(number_of_progress_lines):
             progress_bar += "="
         progress_bar += ">"
-        for x in range(number_of_progress_lines, 9):
+        for x in range(number_of_progress_lines, 29):
             progress_bar += " "
         progress_bar += "] "
 
@@ -45,12 +45,11 @@ def ft_progress(list):
         print("\r", progress_bar, end='')
         yield val
 
-listy = range(100)
+listy = range(1000)
 ret = 0
 for elem in ft_progress(listy):
     ret += (elem + 3) % 5
     time.sleep(0.01)
-
 
 print()
 print(ret)
