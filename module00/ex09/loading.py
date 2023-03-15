@@ -11,10 +11,7 @@ def ft_progress(list):
         
         if list.index(val) == 0: # (1)
             expected_time = 0. + (0.01 * len(list)) # Simulate doing a few calculations
-            yield expected_time
-
             start_time = time.time()
-            yield start_time
 
         # Write ETA: 
         progress_bar += "{:.2f}".format(expected_time)
