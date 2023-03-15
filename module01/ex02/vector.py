@@ -1,6 +1,3 @@
-from typing import List, Tuple
-from copy import deepcopy
-
 # UNDERSTANDING ZERRO ARRAY INITIALIZATION
 # See https://intellipaat.com/community/63426/how-to-create-a-zero-matrix-without-using-numpy
 # rows, cols = 3,6
