@@ -49,7 +49,12 @@ class Bank(object):
         """
 
     def fix_account(self, name):
-        """ fix account associated to name if corrupted
+        """ fix account associated to name if corrupted. Since the 'add'
+            method MUST ONLY control the Account type and name repetition,
+            corrputed accounts can get into the Bank. When they try to 
+            transfer or get transferred, an error occurs. Calling fix_account
+            should fix whatever problem they have.
+            
         @name: str(name) of the account
         @return True if success, False if an error occured
         """
@@ -89,3 +94,8 @@ class Bank(object):
 
         # All OK 
         return True
+
+    def check_account_repeated(self, new_account) -> bool:
+        if new_account.name in self.accounts:
+            return False
+
