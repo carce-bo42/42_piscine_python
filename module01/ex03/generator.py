@@ -6,7 +6,7 @@ def generator(text, sep=" ", option=None):
     option precise if a action is performed to the substrings before it is yielded.
     """
     if option is not None \
-            and option != "shuffle" and option != "unique" and option != "ordered":
+            and option not in ["shuffle", "unique", "ordered"]:
         print("ERROR")
         return 
     
