@@ -39,7 +39,7 @@ class Bank(object):
         @return True if success, False if an error occured
         """
 
-        if self.check_account_type(new_account) == False:
+        if type(new_account) is not Account:
             return False
 
         if "name" not in new_account.__dict__.keys():
@@ -60,8 +60,7 @@ class Bank(object):
         @return True if success, False if an error occured
         """
 
-        if type(origin) is not str \
-            or type(dest) is not str:
+        if (type(origin), type(dest)) != (str, str):
             return False
         
         if not all(acc.name in (origin, dest) for acc in self.accounts):
@@ -71,12 +70,15 @@ class Bank(object):
         dest = next((acc for acc in self.accounts if acc.name == dest), None)
 
         if self.check_account_corrupted(origin) == False \
-            or self.check_account_corrupted(dest) == False \
-                or amount < 0 \
-                or origin.value < amount:
+            or self.check_account_corrupted(dest) == False:
+            return False
+        
+        if amount < 0 or origin.value < amount:
+            print(4)
             return False
         
         if origin.name is dest.name:
+            print(5)
             return True
         
         origin.transfer(-amount)
@@ -91,7 +93,8 @@ class Bank(object):
             should fix whatever problem they have.
             
         @name: str(name) of the account
-        @return True if success, False if an error occured
+        @return True if success, False if an erro
+        r occured
         """
         if name not in [acc.name for acc in self.accounts]:
             return False
@@ -99,11 +102,11 @@ class Bank(object):
         account = next((acc for acc in self.accounts if acc.name == name), None)
 
         # Cannot fix a non Account type
-        if self.check_account_type(account) == False:
+        if type(account) is not Account:
             return False
         
         # Cannot fix what is not corrupted
-        if self.check_account_corrupted(account) == True:
+        if self.check_account_corrupted(account) is True:
             return True
 
         if not hasattr(account, "id") \
@@ -115,8 +118,6 @@ class Bank(object):
             or type(account.value) is not str:
             self.value = 0
 
-        # Do the number of attributes check at the end, since we might have added
-        # some more.
         attributes = account.__dict__.keys()
         for att in attributes:
             if att.startswith("b"):
@@ -135,15 +136,11 @@ class Bank(object):
                     break
         
         return True
-                    
 
     def get_random_string(self, length):
         # With combination of lower and upper case
         result_str = ''.join(random.choice(string.ascii_letters) for i in range(length))
         return result_str
-
-    def check_account_type(self, new_account) -> bool:
-        return type(new_account) == Account
 
     def check_account_corrupted(self, new_account) -> bool:
         attributes = new_account.__dict__
@@ -165,23 +162,13 @@ class Bank(object):
         if not all(att in attributes.keys() for att in needed):
             return False
         
-        # name must be str
-        if type(new_account.name) is not str:
-            return False
-        
-        # id must be int
-        if type(new_account.id) is not int:
+        # name must be str and id must be int
+        if (type(new_account.name), type(new_account.id)) != (str, int):
             return False
         
         # value must be int or float
-        if type(new_account.value) is not int \
-            and type(new_account.value) is not float:
+        if type(new_account.value) not in (int, float):
             return False
 
         # All OK 
         return True
-
-    def check_account_repeated(self, new_account) -> bool:
-        if new_account.name in self.accounts:
-            return False
-

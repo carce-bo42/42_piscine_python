@@ -49,6 +49,9 @@ class Vector:
 
     def __add__(self, o): # -> Vector
 
+        if not isinstance(o, type(self)):
+            return TypeError("Vector.__add__: scalar addition to vector")
+
         if self.shape == o.shape:
             result = [([0.] * self.shape[1]) for i in range(self.shape[0])]
             for i in range(self.shape[0]):
@@ -67,6 +70,9 @@ class Vector:
 
     def __sub__(self, o): # -> Vector
 
+        if not isinstance(o, type(self)):
+            return TypeError("Vector.__sub__: scalar subtraction to vector")
+
         if self.shape == o.shape:
             result = [([0.] * self.shape[1]) for i in range(self.shape[0])]
             for i in range(self.shape[0]):
@@ -84,7 +90,7 @@ class Vector:
 
 
     def __mul__(self, scalar): # -> Vector
-        
+
         result = [([0.] * self.shape[1]) for i in range(self.shape[0])]
         for i in range(self.shape[0]):
             for j in range(self.shape[1]):
