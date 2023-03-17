@@ -33,11 +33,11 @@ class CsvReader():
         Return:
         nested list (list(list, list, ...)) representing the data.
         """
-        self.header = self.getheader()
 
+        self.header = self.getheader()        
         lines = self.file_obj.readlines()
 
-        for line in lines[self.skip_top:len(lines)-self.skip_bottom]:
+        for line in lines[slice(self.skip_top, len(lines) - self.skip_bottom)]:
             self.data.append(line[:-1].split(self.sep))
 
         return self.data
@@ -49,9 +49,10 @@ class CsvReader():
         None: (when self.header is False).
         """
         if self.header and len(self.header_data) == 0:
-            self.header_data = str(self.file_obj.readlines()[0])[:-1].split(self.sep)
+            self.header_data = str(self.file_obj.readline())[:-1].split(self.sep)
             if self.skip_top == 0:
                 self.skip_top = 1
+            
         return self.header_data
 
 if __name__ == "__main__":
