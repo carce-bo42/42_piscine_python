@@ -1,0 +1,10 @@
+LICENSE
+README.md
+pyproject.toml
+src/my_minipack/loading.py
+src/my_minipack/logger.py
+src/my_minipack_carce_bo.egg-info/PKG-INFO
+src/my_minipack_carce_bo.egg-info/SOURCES.txt
+src/my_minipack_carce_bo.egg-info/dependency_links.txt
+src/my_minipack_carce_bo.egg-info/top_level.txt
+test/test.py
