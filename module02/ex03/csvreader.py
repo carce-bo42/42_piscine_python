@@ -37,7 +37,7 @@ class CsvReader():
         self.header = self.getheader()        
         lines = self.file_obj.readlines()
 
-        for line in lines[slice(self.skip_top, len(lines) - self.skip_bottom)]:
+        for line in lines[slice(self.skip_top, len(lines) - self.skip_bottom - 1)]:
             self.data.append(line[:-1].split(self.sep))
 
         return self.data
@@ -63,13 +63,13 @@ if __name__ == "__main__":
         print(f"data: {data}")
         print(f"header: {header}")
 
-    with CsvReader("crash_catalonia.csv") as file:
+    with CsvReader("addresses.csv", ",", False, 1, 1) as file:
         data = file.getdata()
         header = file.getheader()
         print(f"data: {data}")
         print(f"header: {header}")
 
-    with CsvReader("hw_200.csv") as file:
+    with CsvReader("crash_catalonia.csv", ",", True, 1, 2) as file:
         data = file.getdata()
         header = file.getheader()
         print(f"data: {data}")
