@@ -1,6 +1,7 @@
 import numpy as np
 import math as m
 
+
 class TinyStatistician:
 
     def __init__(self) -> None:
@@ -12,7 +13,7 @@ class TinyStatistician:
 
             if isinstance(x, np.ndarray):
                 x = list(x)
-            
+
             return func(sorted(x))
 
         return convert_to_list
@@ -35,19 +36,23 @@ class TinyStatistician:
         if (len(lst) - 1) % 4 == 0:
             return [lst[int(idx)], lst[3 * int(idx)]]
         else:
-            return [(1 - idx) * lst[int(idx)] + idx * lst[int(idx) + 1], \
-                    idx * lst[int(3 * idx)] + (1 - idx) * lst[(int(3 * idx)) + 1]]
+            return [(1 - idx) * lst[int(idx)]
+                        + idx * lst[1 + int(idx)],
+                    (1 - idx) * lst[1 + int(3 * idx)]
+                        + idx * lst[int(3 * idx)]]
 
     @numpy_clear
     def var(lst):
         mean = TinyStatistician.mean(lst)
         return sum(m.pow(value - mean, 2) for value in lst) / len(lst)
-    
+
     @numpy_clear
     def std(lst):
         return m.sqrt(TinyStatistician.var(lst))
 
+
 if __name__ == "__main__":
+
     lol = [1., 10., 42., 59.]
     print(np.quantile(lol, .25))
     print(np.quantile(lol, .5))
@@ -71,5 +76,3 @@ if __name__ == "__main__":
     print(TinyStatistician.quartile(a))
     print(TinyStatistician.var(a))
     print(TinyStatistician.std(a))
-
-
